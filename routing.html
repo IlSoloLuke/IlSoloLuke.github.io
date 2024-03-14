@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Single App</title>
 </head>
+
 <body>
     <h1>Single App</h1>
-  
+
     <script>
 
-      window.document.onload = function(e){ 
-    console.log("document.onload", e, Date.now() ,window.tdiff,  
-    (window.tdiff[0] = Date.now()) && window.tdiff.reduce(fred) ); 
-}
-      
+        window.onload = function () {
+            caricaJson();
+        };
+
+
         function caricaJson() {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'coordinate.json', true);
@@ -39,4 +41,5 @@
         }
     </script>
 </body>
+
 </html>
