@@ -8,8 +8,6 @@
 </head>
 
 <body>
-    <h1>Single App</h1>
-
     <script>
 
         window.onload = function () {
@@ -23,22 +21,18 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var dati = JSON.parse(xhr.responseText);
-                    reindirizzaGoogleMaps(dati);
+                    redirect(dati);
                 }
             };
             xhr.send();
         }
 
-        function reindirizzaGoogleMaps(data) {
-            // Prendi le coordinate casuali dal JSON
-            var coordinateCasuali = data.coordinate;
-            // Scegli una coppia di coordinate casuali
-            var coord = coordinateCasuali[Math.floor(Math.random() * coordinateCasuali.length)];
-            // Costruisci l'URL di Google Maps con le coordinate
-            var urlGoogleMaps = 'https://www.google.com/maps?q=' + coord.lat + ',' + coord.lng;
-            // Reindirizza l'utente verso Google Maps
-            window.location.href = urlGoogleMaps;
+        function redirect(data) {
+            var coords = data.coordinate;
+            var url = 'https://www.google.com/maps?q=' + coords.lat + ',' + coords.lng;
+            window.location.href = url;
         }
+
     </script>
 </body>
 
