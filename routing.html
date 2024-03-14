@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single App</title>
+</head>
+<body>
+    <h1>Single App</h1>
+  
+    <script>
+
+      window.document.onload = function(e){ 
+    console.log("document.onload", e, Date.now() ,window.tdiff,  
+    (window.tdiff[0] = Date.now()) && window.tdiff.reduce(fred) ); 
+}
+      
+        function caricaJson() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'coordinate.json', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var dati = JSON.parse(xhr.responseText);
+                    reindirizzaGoogleMaps(dati);
+                }
+            };
+            xhr.send();
+        }
+
+        function reindirizzaGoogleMaps(data) {
+            // Prendi le coordinate casuali dal JSON
+            var coordinateCasuali = data.coordinate;
+            // Scegli una coppia di coordinate casuali
+            var coord = coordinateCasuali[Math.floor(Math.random() * coordinateCasuali.length)];
+            // Costruisci l'URL di Google Maps con le coordinate
+            var urlGoogleMaps = 'https://www.google.com/maps?q=' + coord.lat + ',' + coord.lng;
+            // Reindirizza l'utente verso Google Maps
+            window.location.href = urlGoogleMaps;
+        }
+    </script>
+</body>
+</html>
