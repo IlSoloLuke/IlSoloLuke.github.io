@@ -3,41 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Mappa Scuola</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 400px; }
+    </style>
 </head>
 <body>
 
 <div id="paginaEsterna">
     <h1>Mappa della scuola</h1>
-    <ul id="mappaScuola"></ul>
+    <div id="map"></div>
 </div>
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const coords = urlParams.get('coords');
 
         if (coords) {
             var dati = JSON.parse(decodeURIComponent(coords));
-            creaMappa(coords);
+            creaMappa(dati);
         } else {
-            console.error('Coordinate JSON mancanti.');
+            console.error('Dati JSON mancanti.');
         }
     };
 
-    function creaMappa(dati) {
-        var coords = data.coordinate;
-		
-		var lat = coords.lat;
-		var lng = coords.lng;
-		
-		var iframe = document.createElement('iframe');
-    iframe.setAttribute('width', '600');
-    iframe.setAttribute('height', '450');
-    iframe.setAttribute('frameborder', '0');
-    iframe.setAttribute('style', 'border:0');
-    iframe.setAttribute('src', 'https://www.google.com/maps/embed/v1/view?key=TUA_API_KEY&center=' + lat + ',' + lng + '&zoom=15');
-    document.getElementById('mappaScuola').appendChild(iframe);
+    function creaMappa(coords) {
+        var lat = coords.lat;
+        var lng = coords.lng;
+
+        var map = L.map('map').setView([lat, lng], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([lat, lng]).addTo(map)
+            .bindPopup('Posizione della scuola')
+            .openPopup();
     }
 </script>
 
