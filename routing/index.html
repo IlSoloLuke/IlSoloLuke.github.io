@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it" ng-app="singleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Routing</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="ControllerPrincipale as principale">
+
+<div id="app">
+    <h1>Scuola su Google Maps</h1>
+    <button ng-click="principale.caricaJSON()">Invia JSON</button>
+</div>
+
+<script>
+    angular.module('singleApp', [])
+    .controller('Controller', function($http, $window) {
+        var principale = this;
+
+        principale.caricaJSON = function() {
+            var url = '../dati/coordinate.json';
+
+            $http.get(url)
+                .then(function(response) {
+                    var datiJson = encodeURIComponent(JSON.stringify(response.data));
+                    $window.location.href = 'mappa.html?coords=' + datiJson;
+                })
+                .catch(function(error) {
+                    console.error('Errore nel caricamento del file JSON:', error);
+                });
+        };
+    });
+</script>
+
+</body>
+</html>
