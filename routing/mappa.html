@@ -18,10 +18,10 @@
         const coords = urlParams.get('coords');
 
         if (coords) {
-            var dati = JSON.parse(decodeURIComponent(datiJson));
-            creaMappa(dati);
+            var dati = JSON.parse(decodeURIComponent(coords));
+            creaMappa(coords);
         } else {
-            console.error('Dati JSON mancanti.');
+            console.error('Coordinate JSON mancanti.');
         }
     };
 
