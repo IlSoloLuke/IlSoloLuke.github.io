@@ -5,12 +5,12 @@
     <title>Mappa Scuola</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        #map { height: 400px; }
+        #page { height:100%; width: 100%; text-align: center; }
     </style>
 </head>
 <body>
 
-<div id="paginaEsterna">
+<div id="page">
     <h1>Mappa della scuola</h1>
     <div id="map"></div>
 </div>
@@ -41,7 +41,7 @@
         }).addTo(map);
 
         L.marker([lat, lng]).addTo(map)
-            .bindPopup('Posizione della scuola')
+            .bindPopup('ITIS Stanislao Cannizzaro')
             .openPopup();
     }
 </script>
